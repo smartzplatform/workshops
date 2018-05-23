@@ -67,6 +67,7 @@ contract Exchange {
             if (order.opType==OpType.BUY) {
                 continue;
             }
+            require(hashes[msg.sender].length>0);
 
             //todo minimum price, since not we get first suitable price
             if (order.priceInWei > _priceInWeiForOneUnit) {
@@ -128,6 +129,11 @@ contract Exchange {
             if (order.isFilled) {
                 continue;
             }
+
+            if (hashes[order.initiator].length==0) {
+                continue;
+            }
+
 
             if (order.currencyCount == _currencyCount) {
 
