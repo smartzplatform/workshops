@@ -44,6 +44,19 @@ class Constructor(ConstructorInstance):
     def post_construct(self, fields, abi_array):
 
         function_specs = {
+            'myDeposit': {
+                'title': 'My deposit',
+                'ui:widget': 'ethCount',
+                'ui:widget_options': {
+                    'show_currency': 'USD'
+                },
+            },
+            'myHashesCount': {
+                'title': 'Count of sent hashes',
+            },
+
+
+
 
             'addHash': {
                 'title': 'Add new hash',
