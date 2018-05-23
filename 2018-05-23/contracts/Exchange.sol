@@ -41,6 +41,8 @@ contract Exchange {
 
     mapping (address => uint) public deposits;
 
+    mapping(uint8 => Order[]) public orders;
+
 
     /*****************************************************************/
 
@@ -53,6 +55,28 @@ contract Exchange {
 
         require(totalEther <= deposits[msg.sender]);
         deposits[msg.sender] = deposits[msg.sender].sub(totalEther);
+
+        // todo optimization :(
+        for(uint i=0; i<orders[_secondBlockchain].length; i++) {
+            Order storage order = orders[_secondBlockchain][i];
+            if (order.opType==OpType.BUY) {
+                continue;
+            }
+
+            //todo minimum price, since not we get first suitable price
+            if (order.priceInWei > _priceInWeiForOneUnit) {
+                continue;
+            }
+
+            if (order.isFilled) {
+                continue;
+            }
+
+            if (order.currencyCount == restCurrencyCount) {
+                // todo
+            }
+
+        }
 
     }
 
