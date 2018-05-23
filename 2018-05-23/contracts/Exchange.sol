@@ -43,10 +43,16 @@ contract Exchange {
 
     /*****************************************************************/
 
+    /**
+     * want to get some currency, give back ether
+     */
     function buy(uint8 _secondBlockchain, uint _currencyCount, uint _priceInWeiForOneUnit) public {
 
     }
 
+    /**
+     * want to get ether, give back some currency
+     */
     function sell(uint8 _secondBlockchain, uint _currencyCount, uint _priceInWeiForOneUnit) public {
 
     }
