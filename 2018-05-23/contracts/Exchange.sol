@@ -32,6 +32,7 @@ contract Exchange {
 
         OpType opType;
         bool isFilled;
+        bytes32 hash;
     }
 
     /*****************************************************************/
@@ -77,7 +78,11 @@ contract Exchange {
             }
 
             if (order.currencyCount == _currencyCount) {
-                //swapRegistry.initiate.value(totalEther)(msg.sender, 7200, !!!HASH, order.initiator);
+
+                bytes32 currentHash = getNextHash(msg.sender);
+                swapRegistry.initiate.value(totalEther)(msg.sender, 7200, currentHash, order.initiator);
+                order.isFilled = true;
+                order.hash = currentHash;
 
                 isMatched = true;
                 break;
@@ -92,7 +97,8 @@ contract Exchange {
                     _currencyCount,
                     _priceInWeiForOneUnit,
                     OpType.BUY,
-                    false
+                    false,
+                    0
                 )
             );
         }
