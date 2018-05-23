@@ -82,6 +82,8 @@ contract Exchange {
                 swapRegistry.initiate.value(totalEther)(msg.sender, 7200, currentHash, order.initiator);
                 order.isFilled = true;
                 order.hash = currentHash;
+
+                isMatched = true;
             }
         }
 
@@ -103,6 +105,7 @@ contract Exchange {
      * want to get ether, give back some currency
      */
     function sell(uint8 _secondBlockchain, uint _currencyCount, uint _priceInWeiForOneUnit) public {
+
 
     }
 
