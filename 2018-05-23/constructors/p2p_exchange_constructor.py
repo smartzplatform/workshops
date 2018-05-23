@@ -45,6 +45,21 @@ class Constructor(ConstructorInstance):
 
         function_specs = {
 
+            'addHash': {
+                'title': 'Add new hash',
+                'description': 'For using in atomic swaps',
+                'inputs': [
+                    {
+                        'title': 'Hash of secret (sha256)',
+                        'description': 'Just type the secret. Hash will be calculated automatically',
+                        'ui:widget': 'stringHash',
+                        "ui:options": {"algorithm": "sha256"}
+                    },
+                ],
+
+                'sorting_order': 20
+            },
+
             'deposit': {
                 'title': 'Deposit ether',
                 'sorting_order': 30
