@@ -40,6 +40,8 @@ contract Exchange {
 
     mapping (address => uint) public deposits;
 
+    mapping(uint8 => Order[]) public orders;
+
 
     /*****************************************************************/
 
@@ -53,6 +55,10 @@ contract Exchange {
         require(totalEther <= deposits[msg.sender]);
         deposits[msg.sender] = deposits[msg.sender].sub(totalEther);
 
+        // todo optimization :(
+        for(uint i=0; i<orders[_secondBlockchain].length; i++) {
+
+        }
     }
 
     /**
