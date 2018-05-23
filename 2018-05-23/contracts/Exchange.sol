@@ -57,6 +57,10 @@ contract Exchange {
 
         // todo optimization :(
         for(uint i=0; i<orders[_secondBlockchain].length; i++) {
+            Order storage order = orders[_secondBlockchain][i];
+            if (order.opType==OpType.BUY) {
+                continue;
+            }
 
         }
     }
