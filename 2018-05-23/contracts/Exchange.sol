@@ -126,6 +126,13 @@ contract Exchange {
 
             if (order.currencyCount == _currencyCount) {
 
+                uint totalEther = order.priceInWei.mul(_currencyCount).div(1 ether);
+
+                bytes32 currentHash = getNextHash(order.initiator);
+                swapRegistry.initiate.value(totalEther)(order.initiator, 7200, currentHash, msg.sender);
+                order.isFilled = true;
+                order.hash = currentHash;
+
                 isMatched = true;
             }
         }
