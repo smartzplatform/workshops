@@ -22,6 +22,18 @@ contract Exchange {
     uint8 constant EOS = 4;
     uint8 constant BITCOIN = 5;
 
+    enum OpType {BUY, SELL}
+
+    struct Order {
+        address initiator;
+
+        uint currencyCount;
+        uint priceInWei;
+
+        OpType opType;
+        bool isFilled;
+    }
+
     /*****************************************************************/
 
     AtomicSwapRegistry public swapRegistry;
