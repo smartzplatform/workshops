@@ -109,7 +109,53 @@ contract Exchange {
      * want to get ether, give back some currency
      */
     function sell(uint8 _secondBlockchain, uint _currencyCount, uint _priceInWeiForOneUnit) public {
+        require(_currencyCount > 0);
+        require(_priceInWeiForOneUnit > 0);
 
+        bool isMatched = false;
+        for(uint i=0; i<orders[_secondBlockchain].length; i++) {
+
+            Order storage order = orders[_secondBlockchain][i];
+            if (order.opType==OpType.SELL) {
+                continue;
+            }
+
+            //todo minimum price, since not we get first suitable price
+            if (order.priceInWei < _priceInWeiForOneUnit) {
+                continue;
+            }
+
+            if (order.isFilled) {
+                continue;
+            }
+
+            if (order.currencyCount == _currencyCount) {
+
+                uint totalEther = order.priceInWei.mul(_currencyCount).div(1 ether);
+
+                bytes32 currentHash = getNextHash(order.initiator);
+                swapRegistry.initiate.value(totalEther)(order.initiator, 7200, currentHash, msg.sender);
+                order.isFilled = true;
+                order.hash = currentHash;
+
+                isMatched = true;
+                break;
+            }
+
+        }
+
+        if (!isMatched) {
+            orders[_secondBlockchain].push(
+                Order(
+                    msg.sender,
+                    _currencyCount,
+                    _priceInWeiForOneUnit,
+                    OpType.SELL,
+                    false,
+                    0
+                )
+            );
+        }
     }
 
     /*****************************************************************/
