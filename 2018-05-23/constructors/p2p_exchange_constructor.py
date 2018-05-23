@@ -37,8 +37,8 @@ class Constructor(ConstructorInstance):
     def construct(self, fields):
         return {
             'result': "success",
-            'source': "",
-            'contract_name': ""
+            'source': self.__class__._TEMPLATE.replace('%address%', fields['address']),
+            'contract_name': "ExchangeConstructed"
         }
 
     def post_construct(self, fields, abi_array):
@@ -53,3 +53,16 @@ class Constructor(ConstructorInstance):
             'dashboard_functions': []
         }
 
+    # language=Solidity
+    __TEMPLATE__ = """
+    
+    
+contract ExchangeConstructed is Exchange {
+    function ExchangeConstructed(address _swapRegistry) 
+        public payable 
+        Exchange(%address%)
+    {
+        %payment_code%
+    }
+}
+    """
