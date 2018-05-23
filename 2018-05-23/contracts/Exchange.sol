@@ -71,6 +71,9 @@ contract Exchange {
                 continue;
             }
 
+            if (order.currencyCount == restCurrencyCount) {
+
+            }
         }
     }
 
