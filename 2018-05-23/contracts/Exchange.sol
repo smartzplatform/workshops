@@ -105,8 +105,26 @@ contract Exchange {
      * want to get ether, give back some currency
      */
     function sell(uint8 _secondBlockchain, uint _currencyCount, uint _priceInWeiForOneUnit) public {
+        require(_currencyCount > 0);
+        require(_priceInWeiForOneUnit > 0);
 
+        bool isMatched = false;
+        for(uint i=0; i<orders[_secondBlockchain].length; i++) {
+            isMatched = true;
+        }
 
+        if (!isMatched) {
+            orders[_secondBlockchain].push(
+                Order(
+                    msg.sender,
+                    _currencyCount,
+                    _priceInWeiForOneUnit,
+                    OpType.SELL,
+                    false,
+                    0
+                )
+            );
+        }
     }
 
     /*****************************************************************/
