@@ -13,12 +13,34 @@ contract Exchange {
 
     /*****************************************************************/
 
+    /**
+     * Blockchains to swap with (one of them with be useless, since exchange contract will be deployed to it)
+     */
+    uint8 constant ETH = 1;
+    uint8 constant ETH_KOVAN = 2;
+    uint8 constant ETH_RINKEBY = 3;
+    uint8 constant EOS = 4;
+    uint8 constant BITCOIN = 5;
+
+    /*****************************************************************/
+
     AtomicSwapRegistry public swapRegistry;
 
     mapping (address => uint) public deposits;
 
 
     /*****************************************************************/
+
+    function buy(uint8 _secondBlockchain, uint _currencyCount, uint _priceInWeiForOneUnit) public {
+
+    }
+
+    function sell(uint8 _secondBlockchain, uint _currencyCount, uint _priceInWeiForOneUnit) public {
+
+    }
+
+    /*****************************************************************/
+
 
     function myDeposit() view public returns (uint) {
         return deposits[msg.sender];
