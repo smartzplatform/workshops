@@ -62,6 +62,13 @@ contract Exchange {
                 continue;
             }
 
+            //todo minimum price, since not we get first suitable price
+            if (order.priceInWei > _priceInWeiForOneUnit) {
+                continue;
+            }
+
+
+
         }
     }
 
