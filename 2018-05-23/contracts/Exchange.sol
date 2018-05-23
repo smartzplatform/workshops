@@ -67,7 +67,9 @@ contract Exchange {
                 continue;
             }
 
-
+            if (order.isFilled) {
+                continue;
+            }
 
         }
     }
