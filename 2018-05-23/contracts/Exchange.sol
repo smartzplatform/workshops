@@ -110,7 +110,24 @@ contract Exchange {
 
         bool isMatched = false;
         for(uint i=0; i<orders[_secondBlockchain].length; i++) {
-            isMatched = true;
+            Order storage order = orders[_secondBlockchain][i];
+            if (order.opType==OpType.SELL) {
+                continue;
+            }
+
+            //todo minimum price, since not we get first suitable price
+            if (order.priceInWei < _priceInWeiForOneUnit) {
+                continue;
+            }
+
+            if (order.isFilled) {
+                continue;
+            }
+
+            if (order.currencyCount == _currencyCount) {
+
+                isMatched = true;
+            }
         }
 
         if (!isMatched) {
