@@ -55,7 +55,25 @@ class Constructor(ConstructorInstance):
                 'title': 'Count of sent hashes',
             },
 
+            'orders': {
+                'title': 'Order info',
+                'description': 'Show info about existing order',
+                'inputs': [
+                    {'title': 'Second blockchain ID',
+                     'description': 'ETH = 1; ETH_KOVAN = 2; ETH_RINKEBY = 3; EOS = 4; BITCOIN = 5;'},
+                    {'title': 'Order ID', },
+                ],
+                'outputs': [
+                    {'title': 'Order creator'},
+                    {'title': 'Second blockchain currency amount (in minimal particles, eg satoshi, wei)'},
+                    {'title': 'Price in wei of one currency unit (bitcoin, ether)'},
+                    {'title': 'Order type (Buy=0, Sell=1)'},
+                    {'title': 'Is filled'},
+                    {'title': 'Hash of secret for atomic swap'},
+                ],
 
+                'sorting_order': 10
+            },
 
 
             'addHash': {
