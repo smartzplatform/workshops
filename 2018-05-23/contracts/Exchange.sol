@@ -56,6 +56,8 @@ contract Exchange {
         require(totalEther <= deposits[msg.sender]);
         deposits[msg.sender] = deposits[msg.sender].sub(totalEther);
 
+
+        bool isMatched = false;
         // todo optimization :(
         for(uint i=0; i<orders[_secondBlockchain].length; i++) {
             Order storage order = orders[_secondBlockchain][i];
@@ -72,10 +74,25 @@ contract Exchange {
                 continue;
             }
 
-            if (order.currencyCount == restCurrencyCount) {
-                // todo
+            if (order.currencyCount == _currencyCount) {
+                //swapRegistry.initiate.value(totalEther)(msg.sender, 7200, !!!HASH, order.initiator);
+
+                isMatched = true;
+                break;
             }
 
+        }
+
+        if (!isMatched) {
+            orders[_secondBlockchain].push(
+                Order(
+                    msg.sender,
+                    _currencyCount,
+                    _priceInWeiForOneUnit,
+                    OpType.BUY,
+                    false
+                )
+            );
         }
 
     }
