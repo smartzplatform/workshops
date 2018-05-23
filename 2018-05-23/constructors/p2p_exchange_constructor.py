@@ -44,6 +44,21 @@ class Constructor(ConstructorInstance):
     def post_construct(self, fields, abi_array):
 
         function_specs = {
+
+            'deposit': {
+                'title': 'Deposit ether',
+                'sorting_order': 30
+            },
+
+            'withdraw': {
+                'title': 'Withdraw ether',
+                'inputs': [
+                    {'title': 'Eth amount', 'ui:widget': 'ethCount'},
+                ],
+                'sorting_order': 40
+            },
+
+
             'buy': {
                 'title': 'Buy',
                 'description': 'You will send ether and will get second blockchain currency',
