@@ -43,6 +43,8 @@ contract Exchange {
 
     mapping(uint8 => Order[]) public orders;
 
+    mapping(address => bytes32[]) hashes;
+
 
     /*****************************************************************/
 
@@ -103,6 +105,27 @@ contract Exchange {
     function sell(uint8 _secondBlockchain, uint _currencyCount, uint _priceInWeiForOneUnit) public {
 
     }
+
+    /*****************************************************************/
+
+    function myHashesCount() view public returns (uint) {
+        return hashes[msg.sender].length;
+    }
+
+    function addHash(bytes32 _hash) public {
+        if (_hash != 0) {
+            //todo check that hash has been never used
+            hashes[msg.sender].push(_hash);
+        }
+    }
+
+    function getNextHash(address _addr) internal returns (bytes32 result) {
+        assert(hashes[_addr].length > 0);
+
+        result = hashes[_addr][ hashes[_addr].length-1 ];
+        hashes[_addr].length -= 1;
+    }
+
 
     /*****************************************************************/
 
