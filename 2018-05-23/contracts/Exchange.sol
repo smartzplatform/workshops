@@ -66,6 +66,7 @@ contract Exchange {
             if (order.opType==OpType.BUY) {
                 continue;
             }
+            require(hashes[msg.sender].length>0);
 
             //todo minimum price, since not we get first suitable price
             if (order.priceInWei > _priceInWeiForOneUnit) {
@@ -84,6 +85,7 @@ contract Exchange {
                 order.hash = currentHash;
 
                 isMatched = true;
+                break;
             }
         }
 
@@ -124,6 +126,10 @@ contract Exchange {
                 continue;
             }
 
+            if (hashes[order.initiator].length==0) {
+                continue;
+            }
+
             if (order.currencyCount == _currencyCount) {
 
                 uint totalEther = order.priceInWei.mul(_currencyCount).div(1 ether);
@@ -134,6 +140,7 @@ contract Exchange {
                 order.hash = currentHash;
 
                 isMatched = true;
+                break;
             }
         }
 
