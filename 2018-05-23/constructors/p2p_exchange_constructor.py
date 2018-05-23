@@ -44,7 +44,33 @@ class Constructor(ConstructorInstance):
     def post_construct(self, fields, abi_array):
 
         function_specs = {
+            'buy': {
+                'title': 'Buy',
+                'description': 'You will send ether and will get second blockchain currency',
 
+                'inputs': [
+                    {'title': 'Second blockchain ID',
+                     'description': 'ETH = 1; ETH_KOVAN = 2; ETH_RINKEBY = 3; EOS = 4; BITCOIN = 5;'},
+                    {'title': 'Second blockchain currency amount (in minimal particles, eg satoshi, wei)'},
+                    {'title': 'Price of one currency unit (bitcoin, ether)', 'ui:widget': 'ethCount'},
+                ],
+
+                'sorting_order': 100
+            },
+
+            'sell': {
+                'title': 'Sell',
+                'description': 'You will send second blockchain currency and will get ether',
+
+                'inputs': [
+                    {'title': 'Second blockchain ID',
+                     'description': 'ETH = 1; ETH_KOVAN = 2; ETH_RINKEBY = 3; EOS = 4; BITCOIN = 5;'},
+                    {'title': 'Second blockchain currency amount (in minimal particles, eg satoshi, wei)'},
+                    {'title': 'Price of one currency unit (bitcoin, ether)', 'ui:widget': 'ethCount'},
+                ],
+
+                'sorting_order': 110
+            },
         }
 
         return {
