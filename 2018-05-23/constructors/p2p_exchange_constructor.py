@@ -13,7 +13,16 @@ class Constructor(ConstructorInstance):
 
     def get_params(self):
         json_schema = {
+            "type": "object",
+            "required": ['address'],
+            "additionalProperties": False,
 
+            "properties": {
+                'address': {
+                    "title": "Address of Swap registry contract",
+                    "$ref": "#/definitions/address"
+                }
+            }
         }
 
         ui_schema = {
