@@ -141,7 +141,7 @@ class Constructor(ConstructorInstance):
         }
 
     # language=Solidity
-    __TEMPLATE__ = """
+    _TEMPLATE = """
 pragma solidity ^0.4.17;
 
 /**
