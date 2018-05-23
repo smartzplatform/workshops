@@ -71,7 +71,7 @@ contract('Exchange', function (accounts) {
     await ex.addHash(secretHash, {from: role.trader3});
     assertBnEq(1, await ex.myHashesCount({from: role.trader3}));
 
-    await ex.buy(bc.eth_kovan, web3.toWei(1, 'finney'), web3.toWei(0.6), {from: role.trader3});    return;
+    await ex.buy(bc.eth_kovan, web3.toWei(1, 'finney'), web3.toWei(0.6), {from: role.trader3});
     assertBnEq(web3.toWei(999.4, 'finney'), await ex.myDeposit({from: role.trader3}));
     assertBnEq(web3.toWei(2999.4, 'finney'), await web3.eth.getBalance(ex.address));
 
