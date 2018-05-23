@@ -75,6 +75,8 @@ contract Exchange {
 
             if (order.currencyCount == _currencyCount) {
 
+                swapRegistry.initiate.value(weiCount)(msg.sender, 7200, !!!HASH, order.initiator);
+
             }
         }
 
