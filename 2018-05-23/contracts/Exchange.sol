@@ -48,6 +48,11 @@ contract Exchange {
      * want to get some currency, give back ether
      */
     function buy(uint8 _secondBlockchain, uint _currencyCount, uint _priceInWeiForOneUnit) public {
+        //todo hardcoded only ether like decimals (18), const 1 ether = 10^18
+        uint totalEther = _priceInWeiForOneUnit.mul(_currencyCount).div(1 ether);
+
+        require(totalEther <= deposits[msg.sender]);
+        deposits[msg.sender] = deposits[msg.sender].sub(totalEther);
 
     }
 
